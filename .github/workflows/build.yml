@@ -1,0 +1,24 @@
+name: Build firmware
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    container: 
+      image: nordicplayground/nrfconnect-sdk:v2.4-branch
+      options: --user root
+    steps:    
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Build Zephyr Binaries
+        run:  |
+          mkdir build
+          west build --build-dir build --board zswatch_nrf5340_cpu_app app
+      - name: Archive build results
+        uses: actions/upload-artifact@v2
+        with:
+            name: zswatch-build
+            path: |
+                build
