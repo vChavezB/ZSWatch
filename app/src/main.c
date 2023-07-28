@@ -42,6 +42,7 @@
 #include <zephyr/arch/cpu.h>
 #include <zephyr/logging/log_ctrl.h>
 #include <zephyr/fatal.h>
+#include "dfu.h"
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_WRN);
 
@@ -100,6 +101,7 @@ static void run_init_work(struct k_work *item)
 {
     lv_indev_t *touch_indev;
 
+    dfu_init();
     load_retention_ram();
     heart_rate_sensor_init();
     notifications_page_init(on_notification_page_close, on_notification_page_notification_close);
