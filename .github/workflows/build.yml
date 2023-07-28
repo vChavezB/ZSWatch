@@ -19,11 +19,11 @@ jobs:
       - name: Build Zephyr Binaries
         run:  |
           west build --board zswatch_nrf5340_cpuapp app
-          mkdir ZWatch_build
-          mv build/zephyr/zephyr.elf ZWatch_build/zswatch_${SHORT_SHA}.elf
+          mkdir ZSWatch_build
+          mv build/zephyr/zephyr.elf ZSWatch_build/zswatch_${SHORT_SHA}.elf
       - name: Archive build results
         uses: actions/upload-artifact@v2
         with:
             name: zswatch-build
             path: |
-                ZWatch_build/zswatch_${SHORT_SHA}.elf
+                ZSWatch_build
