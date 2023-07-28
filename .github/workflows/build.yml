@@ -20,7 +20,7 @@ jobs:
         run:  |
           west build --board zswatch_nrf5340_cpuapp app
           mkdir ZSWatch_build
-          mv build/zephyr/zephyr.elf ZSWatch_build/zswatch_${SHORT_SHA}.elf
+          mv build/zephyr/zephyr.hex ZSWatch_build/zswatch_${SHORT_SHA}.hex
       - name: Archive build results
         uses: actions/upload-artifact@v2
         with:
