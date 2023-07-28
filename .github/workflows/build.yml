@@ -14,16 +14,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Get Commit Short SHA
-        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+      # - name: Get Commit Short SHA
+      #  run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
       - name: Build Zephyr Binaries
         run:  |
           west build --board zswatch_nrf5340_cpuapp app
           mkdir ZSWatch_build
           mv build/zephyr/zephyr.hex ZSWatch_build/zswatch_${SHORT_SHA}.hex
-      - name: Archive build results
-        uses: actions/upload-artifact@v2
-        with:
-            name: zswatch-build
-            path: |
-                ZSWatch_build
+      #- name: Archive build results
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #      name: zswatch-build
+      #      path: |
+      #          ZSWatch_build
