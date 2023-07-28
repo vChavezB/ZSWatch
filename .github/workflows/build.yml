@@ -15,7 +15,7 @@ jobs:
       - name: Build Zephyr Binaries
         run:  |
           mkdir build
-          west build --build-dir build --board zswatch_nrf5340_cpu_app app
+          west build --build-dir build --board zswatch_nrf5340_cpuapp app
       - name: Archive build results
         uses: actions/upload-artifact@v2
         with:
