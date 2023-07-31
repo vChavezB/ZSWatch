@@ -1,18 +1,23 @@
-name: Kicad diff
+name: example
+
 on: push
+
 env:
   PCB_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_pcb
   SCH_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_sch
 
 jobs:
-  pcb_diff:
-    runs-on: ubuntu-22.04
-    container: 
-      image: ghcr.io/inti-cmnb/kicad7_auto:1.6.3
-      options: --user root
+  example:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout latest
-        uses: actions/checkout@v3
-      - name: Run DRC
-        run: |
-          kibot -h
+    - uses: actions/checkout@v2
+    - uses: INTI-CMNB/KiBot@v2
+      with:
+        # Required - kibot config file
+        config: kibot.yaml
+        # optional - prefix to output defined in config
+        dir: output
+        # optional - schematic file
+        schema: $SCH_PATH
+        # optional - PCB design file
+        board: $PCB_PATH
