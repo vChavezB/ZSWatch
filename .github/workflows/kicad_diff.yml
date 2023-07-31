@@ -1,6 +1,9 @@
 name: Kicad diff
-on: pull_request
-
+on:
+  pull_request:
+    paths:
+      - '**.kicad_sch'
+      - '**.kicad_pcb'
 env:
   PCB_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_pcb
   SCH_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_sch
@@ -11,7 +14,6 @@ jobs:
     container: 
       image: ghcr.io/inti-cmnb/kicad7_auto:1.6.3
       options: --user root
-    if: ${{ github.event.pull_request }}
     steps:
       - name: Checkout latest
         uses: actions/checkout@v3
