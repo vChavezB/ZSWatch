@@ -1,1 +1,5 @@
-kibot
+kibot:
+  version: 1
+
+preflight:
+  run_drc: true
