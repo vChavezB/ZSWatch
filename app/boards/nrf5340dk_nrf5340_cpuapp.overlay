@@ -37,6 +37,23 @@
         };
     };
 
+	spi3_default: spi3_default {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK, 0, 17)>,
+				<NRF_PSEL(SPIM_MOSI, 0, 13)>,
+				<NRF_PSEL(SPIM_MISO, 0, 14)>;
+			};
+	};
+
+	spi3_sleep: spi3_sleep {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK, 0, 17)>,
+				<NRF_PSEL(SPIM_MOSI, 0, 13)>,
+				<NRF_PSEL(SPIM_MISO, 0, 14)>;
+			low-power-enable;
+		};
+	};
+
     // Set to the pins that the display is connected to
     spi4_default: spi4_default {
         group1 {
@@ -59,6 +76,7 @@
     chosen {
         zephyr,display = &gc9a01;
         zephyr,keyboard-scan = &cst816s;
+        nordic,pm-ext-flash = &at25sl128a;
     };
     aliases {
         sw-top-right = &button1;
@@ -145,6 +163,28 @@
     };
 };
 
+&spi3  {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    pinctrl-0 = <&spi3_default>;
+    pinctrl-1 = <&spi3_sleep>;
+    pinctrl-names = "default", "sleep";
+    // Use Integrated flash MX25R6435F from DK 
+    cs-gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
+    at25sl128a: at25sl128a@0 {
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		status = "okay";
+		spi-max-frequency = <10000000>;
+		jedec-id = [c2 28 17];
+		size = <DT_SIZE_M(8*8)>;
+		has-dpd;
+		t-enter-dpd = <10000>;
+		t-exit-dpd = <35000>;
+	};
+
+};
+
 &spi4  {
     status = "okay";
     compatible = "nordic,nrf-spim";
@@ -165,4 +205,8 @@
         reset-gpios = <&gpio0 25 GPIO_ACTIVE_HIGH>;
         dc-gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
     };
+};
+
+&qspi{
+    status="disabled";
 };
