@@ -14,6 +14,6 @@ jobs:
         # optional - prefix to output defined in config
         dir: output
         # optional - schematic file
-        schema: ZSWatch-kicad-v2/ZSWatch.kicad_sch
+        # schema: ZSWatch-kicad-v2/ZSWatch.kicad_sch
         # optional - PCB design file
         board: ZSWatch-kicad-v2/ZSWatch.kicad_pcb
