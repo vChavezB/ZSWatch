@@ -2,10 +2,6 @@ name: example
 
 on: push
 
-env:
-  PCB_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_pcb
-  SCH_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_sch
-
 jobs:
   example:
     runs-on: ubuntu-latest
@@ -18,6 +14,6 @@ jobs:
         # optional - prefix to output defined in config
         dir: output
         # optional - schematic file
-        schema: $SCH_PATH
+        schema: ZSWatch-kicad-v2/ZSWatch.kicad_sch
         # optional - PCB design file
-        board: $PCB_PATH
+        board: ZSWatch-kicad-v2/ZSWatch.kicad_pcb
