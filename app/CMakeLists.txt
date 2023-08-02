@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.20.0)
 
-string(REGEX MATCH "@([0-9]+)$" ZSWATCH_BOARD "${BOARD}")
+string(REGEX MATCH "@([0-9]+)$" BOARD_REV "${BOARD}")
 
-if(ZSWATCH_BOARD)
+if(BOARD_REV)
     set(NUMBER ${CMAKE_MATCH_1})
     if(${NUMBER} GREATER_EQUAL 2)
         set(DFU_BUILD true)
