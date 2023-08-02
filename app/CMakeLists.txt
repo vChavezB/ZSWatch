@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20.0)
 
-string(REGEX MATCH "@([0-9]+)$" BOARD_REV "${BOARD}")
+string(REGEX MATCH "zswatch_nrf5340_cpuapp(_ns)?@([0-9]+)$" BOARD_REV "${BOARD}")
 
 if(BOARD_REV)
     set(NUMBER ${CMAKE_MATCH_1})
