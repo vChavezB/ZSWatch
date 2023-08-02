@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.20.0)
 
-string(REGEX MATCH "zswatch_nrf5340_cpuapp([0-9]+)" FILE_WITH_NUMBER "${BOARD}")
-
 string(REGEX MATCH "@([0-9]+)$" ZSWATCH_BOARD "${BOARD}")
 
 if(ZSWATCH_BOARD)
