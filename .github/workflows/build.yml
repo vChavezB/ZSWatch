@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         ncs_version: [2.4]
-        board: [zswatch_nrf5340_cpuapp]
+        board: [zswatch_nrf5340_cpuapp@1,zswatch_nrf5340_cpuapp@2]
     container: 
       image: nordicplayground/nrfconnect-sdk:v${{ matrix.ncs_version }}-branch
       options: --user root
