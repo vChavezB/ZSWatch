@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.20.0)
 
+message("Board val 1 '${BOARD}'")
 string(REGEX MATCH "zswatch_nrf5340_cpuapp(_ns)?@([0-9]+)$" BOARD_REV "${BOARD}")
-
+message("Board val 2 '${BOARD}'")
 if(BOARD_REV)
     set(NUMBER ${CMAKE_MATCH_1})
     if(${NUMBER} GREATER_EQUAL 2)
@@ -11,6 +12,7 @@ if(BOARD_REV)
         set(mcuboot_DTC_OVERLAY_FILE ${CMAKE_CURRENT_SOURCE_DIR}/overlays/mcuboot.overlay)       
     endif()
 endif()
+message("Board val 3 '${BOARD}'")
 
 set(BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
