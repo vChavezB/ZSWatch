@@ -41,6 +41,7 @@
 #include <zephyr/arch/cpu.h>
 #include <zephyr/logging/log_ctrl.h>
 #include <zephyr/fatal.h>
+#include "bme688_bsec/bme688_bsec.h"
 #include "dfu.h"
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_WRN);
@@ -95,6 +96,10 @@ ZBUS_LISTENER_DEFINE(main_ble_comm_lis, zbus_ble_comm_data_callback);
 
 static void run_init_work(struct k_work *item)
 {
+    bme688_init();
+    enable_bluetoth();
+
+/*
     lv_indev_t *touch_indev;
 
     load_retention_ram();
@@ -139,6 +144,7 @@ static void run_init_work(struct k_work *item)
     watch_state = WATCHFACE_STATE;
     lv_obj_add_event_cb(lv_scr_act(), screen_gesture_event, LV_EVENT_GESTURE, NULL);
     watchface_app_start(input_group);
+*/
 }
 
 void run_wdt_work(struct k_work *item)

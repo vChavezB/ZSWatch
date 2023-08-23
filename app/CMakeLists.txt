@@ -62,12 +62,18 @@ target_sources(app PRIVATE ${font_sources})
 
 FILE(GLOB ui_sources src/ui/*.c)
 target_sources(app PRIVATE ${ui_sources})
-
 zephyr_sources_ifdef(CONFIG_WATCHFACE_ANALOG src/ui/watchfaces/zsw_watchface_analog_ui.c)
 zephyr_sources_ifdef(CONFIG_WATCHFACE_DIGITAL src/ui/watchfaces/zsw_watchface_digital_ui.c)
 zephyr_sources_ifdef(CONFIG_WATCHFACE_MINIMAL src/ui/watchfaces/zsw_watchface_minimal_ui.c)
+
 
 FILE(GLOB events_sources src/events/*.c)
 target_sources(app PRIVATE ${events_sources})
 
 add_compile_definitions(LV_LVGL_H_INCLUDE_SIMPLE)
+
+# BME688 BSEC implementation
+set(bme688_bsec_lib_path ${CMAKE_CURRENT_SOURCE_DIR}/lib/bme688_bsec)
+target_link_libraries(app PRIVATE ${bme688_bsec_lib_path}/bin/gcc/Cortex_M33/libalgobsec.a)
+target_include_directories(app PRIVATE ${bme688_bsec_lib_path}/inc)
+target_sources(app PRIVATE src/bme688_bsec/bme688_bsec.c)
