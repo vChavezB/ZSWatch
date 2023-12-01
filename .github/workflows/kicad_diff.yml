@@ -1,0 +1,40 @@
+name: Kicad diff
+on:
+  pull_request:
+    #paths:
+    #  - '**.kicad_sch'
+    # - '**.kicad_pcb'
+
+env:
+  PCB_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_pcb
+  SCH_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_sch
+
+jobs:
+  pcb_diff:
+    runs-on: ubuntu-22.04
+    container: 
+      image: ghcr.io/inti-cmnb/kicad7_auto:1.6.3
+      options: --user root
+    steps:
+      - name: Checkout latest
+        uses: actions/checkout@v3
+        with:
+          path: new
+      - name: Checkout main
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          path: old
+      - name: Run diff
+        run: |
+          python3 /usr/bin/kicad-diff.py old/$PCB_PATH new/$PCB_PATH --output_dir pcb_diff
+          python3 /usr/bin/kicad-diff.py old/$SCH_PATH new/$SCH_PATH --output_dir sch_diff
+          mkdir kicad_diff
+          mv pcb_diff/diff.pdf kicad_diff/pcb_diff.pdf
+          mv sch_diff/diff.pdf kicad_diff/sch_diff.pdf
+      - name: Archive build 
+        uses: actions/upload-artifact@v2
+        with:
+            name: kicad-diff
+            path: |
+                kicad_diff
