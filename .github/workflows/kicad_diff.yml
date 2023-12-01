@@ -1,9 +1,10 @@
 name: Kicad diff
 on:
   pull_request:
-    paths:
-      - '**.kicad_sch'
-      - '**.kicad_pcb'
+    #paths:
+    #  - '**.kicad_sch'
+    # - '**.kicad_pcb'
+
 env:
   PCB_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_pcb
   SCH_PATH: ZSWatch-kicad-v2/ZSWatch.kicad_sch
