@@ -31,7 +31,7 @@ jobs:
           mkdir kicad_diff
           mv pcb_diff/diff.pdf kicad_diff/pcb_diff.pdf
           mv sch_diff/diff.pdf kicad_diff/sch_diff.pdf
-      - name: Archive build results
+      - name: Archive build 
         uses: actions/upload-artifact@v2
         with:
             name: kicad-diff
